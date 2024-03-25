@@ -1,18 +1,21 @@
 window.onload = function () {
+  // Get buttons on DOM
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
 
+  // Add listener to Start Button
   startButton.addEventListener("click", function () {
     startGame();
   });
 
+  // Callback function after clicking the Start Button
   function startGame() {
     console.log("start game");
     game = new Game();
     game.start();
   }
 
-  // Function that handles keydown event
+  // Callback function that handles key-down event
   function handleKeydown(event) {
     const key = event.key;
     const possibleKeystrokes = [
@@ -22,7 +25,7 @@ window.onload = function () {
       "ArrowDown",
     ];
 
-    // Check if the pressed key is in the possibleKeystrokes array
+    // Check if the pressed key is in the possible Keystrokes array
     if (possibleKeystrokes.includes(key)) {
       event.preventDefault();
 
@@ -44,7 +47,7 @@ window.onload = function () {
     }
   }
 
-  // Function that handles kedup event
+  // Callback function that handles key-up event
   function handleKeyup(event) {
     const key = event.key;
     const possibleKeystrokes = [
@@ -54,7 +57,7 @@ window.onload = function () {
       "ArrowDown",
     ];
 
-    // Check if the pressed key is in the possibleKeystrokes array
+    // Check if the pressed key is in the possible Keystrokes array
     if (possibleKeystrokes.includes(key)) {
       event.preventDefault();
 
@@ -76,11 +79,11 @@ window.onload = function () {
     }
   }
 
-  // Add the handleKeydown function as an event listener for the keydown event
+  // Add the handle Keydown & Keyup function as an event listener for the keydown event
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("keyup", handleKeyup);
 
-  // Add an event listener to the restart button
+  // Add an event listener to the Restart Button
   restartButton.addEventListener("click", function () {
     // Call the restartGame function when the button is clicked
     restartGame();
