@@ -6,13 +6,13 @@ class Player extends Component {
 
     this.directionX = 0;
     this.directionY = 0;
+    this.speed = 5;
   }
 
   move() {
-    // Update player's car position based on directionX and directionY
-    this.left += this.directionX;
-    this.top += this.directionY;
-    debugger;
+    // Update player position based on directionX and directionY
+    this.left += this.directionX * this.speed;
+    this.top += this.directionY * this.speed;
 
     // Ensure the player's car stays within the game screen
     if (this.left < 10) {

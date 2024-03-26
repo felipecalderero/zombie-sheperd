@@ -15,7 +15,7 @@ class Component {
     this.element.style.height = `${height}px`;
     this.element.style.left = `${left}px`;
     this.element.style.top = `${top}px`;
-    this.element.style.zIndex = this.top;
+    this.element.style.zIndex = this.top - this.height;
 
     this.gameScreen.appendChild(this.element);
   }
@@ -23,6 +23,6 @@ class Component {
   updatePosition() {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
-    this.element.style.zIndex = this.top;
+    this.element.style.zIndex = this.top - this.height;
   }
 }

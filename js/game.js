@@ -14,9 +14,9 @@ class Game {
       this.gameScreen,
       400,
       200,
-      100,
-      150,
-      "./images/beagle.gif"
+      70,
+      70,
+      "./images/ojos-vueltos.png"
     );
 
     // Initialize array of Zombies
@@ -101,7 +101,6 @@ class Game {
         } else if (distance < followDist) {
           // Player is close to the zombie and it starts following her
           // Update zombie direction to move towards player
-          console.log(this.player.top, zombie.top);
           const directionTop = this.player.top - zombie.top;
           const directionLeft = this.player.left - zombie.left;
           const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);

@@ -3,7 +3,7 @@ class Treat extends Component {
     const randomLeft = Math.floor(Math.random() * 500 + 70);
     const randomTop = Math.floor(Math.random() * 500 + 70);
 
-    super(gameScreen, randomLeft, randomTop, 75, 75, "./images/hueso.gif");
+    super(gameScreen, randomLeft, randomTop, 40, 40, "./images/hueso1.png");
   }
 
   /*

@@ -99,7 +99,6 @@ class Zombie extends Component {
     const playerX = player.top + player.height / 2;
     const playerY = player.left + player.width / 2;
 
-    console.log(zombieX, zombieY, playerX, playerY);
     return Math.round(
       Math.sqrt((zombieX - playerX) ** 2 + (zombieY - playerY) ** 2)
     );
