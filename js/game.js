@@ -3,6 +3,7 @@ class Game {
   constructor() {
     // Access to DOM elements: Intro, Game and GameOver screens
     this.startScreen = document.getElementById("game-intro");
+    this.gameContainer = document.getElementById("game-container");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
     // Initialize Game Screen
@@ -12,8 +13,8 @@ class Game {
     // Initialize a new player
     this.player = new Player(
       this.gameScreen,
+      800,
       400,
-      200,
       70,
       70,
       "./images/ojos-vueltos.png"
@@ -36,10 +37,13 @@ class Game {
 
   start() {
     // Set height and width
-    this.gameScreen.style.height = `${this.height}px`;
-    this.gameScreen.style.width = `${this.width}px`;
+    //this.gameScreen.style.height = `${this.height}px`;
+    //this.gameScreen.style.width = `${this.width}px`;
+    this.gameScreen.style.height = `100vh`;
+    this.gameScreen.style.width = `100vw`;
     // Set Intro Screen not visible and display Game Screen
     this.startScreen.style.display = "none";
+    this.gameContainer.style.display = "flex";
     this.gameScreen.style.display = "block";
     // Launch Interval Loop for the Game
     this.gameIntervalId = setInterval(() => {

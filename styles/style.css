@@ -1,35 +1,155 @@
+@import url(https://fonts.googleapis.com/css?family=Denk+One);
+
 body {
   padding: 0;
-  text-align: center;
-  background-color: purple;
-  background-image: url("/images/zombie_background.png");
+  margin: 0;
+  border: 0;
+  background-color: #ada0ff;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /*text-align: center;
+  /*background-image: url("/images/zombie_background.png");
   background-repeat: no-repeat;
-  /* height: 500px; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  height: 500px; /* You must set a specified height */
+  /*background-position: center center; /* Center the image */
+  /*background-repeat: no-repeat; /* Do not repeat the image */
+  /*background-size: contain; /* Resize the background image to cover the entire container */
 }
 
 #game-intro {
-  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: auto;
+  align-content: space-around;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#game-intro-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#intro-image img {
+  height: 700px;
+  width: 100%;
+  padding: 0px 040px 0px 0px;
+}
+
+#intro-text {
+  text-align: center;
+}
+
+#intro-text h1 {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 6rem;
+  text-align: center;
+}
+
+#intro-text h2 {
+  padding: 0 0px 40px 0;
+  color: black;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+#intro-text button {
+  font-size: 30px;
+  background-color: greenyellow;
+  color: purple;
+  padding: 20px 40px;
+  border: 0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  letter-spacing: 0px;
+  font-size: 2rem;
+  border-radius: 45px;
+  margin-bottom: 20px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+
+  user-select: none;
+}
+
+#intro-text button:hover {
+  background-color: green;
+  cursor: pointer;
+}
+
+#intro-text button:active {
+  background-color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#footer ul {
+  display: flex;
+  justify-content: space-between;
+}
+#footer li {
+  list-style: none;
+  margin: 0px 140px 100px 100px;
+  color: black;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 #game-container {
-  display: flex;
   width: 100vw;
-  padding: 20px 0px;
-  justify-content: center;
+  padding: 0px 0px;
+  display: none;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+
+#stats {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  width: 100vw;
+}
+
+#stats ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#stats li {
+  list-style: none;
+  padding: 0 80px 0px 80px;
+  color: black;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  letter-spacing: 2px;
+  font-size: 2rem;
 }
 
 #game-screen {
   display: none;
-  align-content: center;
-  padding: 20px 0px;
+  /*align-content: center;*/
+  padding: 0px 0px;
   overflow: hidden;
-  position: relative;
+  /*position: relative;
   /*background-image: url(../images/background.jpg);*/
-  background-color: white;
+  background-color: #ada0ff;
   background-size: cover;
+  z-index: -1;
   /*animation: slide 5s linear infinite;*/
 }
 
@@ -56,21 +176,6 @@ body {
   font-family: "Verdana";
 }
 
-.logo-img {
-  width: 350px;
-}
-
 .arrows-img {
   width: 150px;
-}
-
-body button {
-  font-size: 30px;
-  background-color: greenyellow;
-  color: #fff;
-  padding: 20px 40px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
 }

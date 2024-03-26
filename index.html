@@ -5,25 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <title>Zombie Sheperd</title>
+    <title>Zombie Shepherd</title>
   </head>
   <body>
     <main>
       <!-- #game-intro is initially shown on the game start screen -->
       <div id="game-intro">
-        <h1>Zombie Sheperd</h1>
-        <!--<img src="./images/logo.png" alt="" class="logo-img" /> -->
-        <br />
-        <button id="start-button">Start Game</button>
-        <p>Use the left and right arrow to control the sheperd!</p>
-        <img src="./images/arrows.png" alt="" class="arrows-img" />
+        <div id="game-intro-main">
+          <div id="intro-image">
+            <img src="./images/zombie_background.png" alt="" class="logo-img" />
+          </div>
+          <div id="intro-text">
+            <h1>Zombie<br />Shepherd</h1>
+            <h2>Ready to shepherd <br />some bitting zombies?</h2>
+            <button id="start-button">Start Game</button>
+            <!--<p>Use the left and right arrow to control the sheperd!</p> -->
+            <!--<img src="./images/arrows.png" alt="" class="arrows-img" /> -->
+          </div>
+        </div>
+        <div id="footer">
+          <ul>
+            <li>Designed by Felipe C.</li>
+            <li>Madrid, March 2024</li>
+          </ul>
+        </div>
       </div>
 
       <div id="game-container">
-        <div>
-          <h2>Stats</h2>
-          <p>Score: <span id="score">0</span></p>
-          <p>Lives: <span id="lives">3</span></p>
+        <div id="stats">
+          <ul>
+            <li>Lives: <span id="lives">3</span></li>
+            <li>Level: <span id="score">0</span> zombies</li>
+          </ul>
         </div>
         <!-- #game-screen is initially hidden using CSS style display: none -->
         <div id="game-screen"></div>
