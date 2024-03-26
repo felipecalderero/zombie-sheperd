@@ -22,7 +22,7 @@ class Zombie extends Component {
     this.screenWidth = screenWidth;
     // Zombie direction of movement
     this.direction = [0, 0];
-    this.speed = 2;
+    this.speed = 0.5;
     // Rate of direction change of a zombie (ex. 4 -> 25% of times)
     this.changeDirection = 10;
     // Variable to know when the zombie is biting (dangerous) and when is not
@@ -48,12 +48,18 @@ class Zombie extends Component {
           0.8 * this.direction[0] + 0.2 * (Math.random() - 0.5) * 2,
           0.8 * this.direction[1] + 0.2 * (Math.random() - 0.5) * 2,
         ];
+        this.direction[0] =
+          this.direction[0] /
+          Math.sqrt(this.direction[0] ** 2 + this.direction[1] ** 2);
+        this.direction[1] =
+          this.direction[1] /
+          Math.sqrt(this.direction[0] ** 2 + this.direction[1] ** 2);
       }
       this.left += this.direction[0] * this.speed;
       this.top += this.direction[1] * this.speed;
     }
 
-    // Update the obstacle's position on the screen
+    // Update the zombie's position on the screen
     this.updatePosition();
   }
 
@@ -65,6 +71,21 @@ class Zombie extends Component {
       this.top > 0 - this.height * 2 &&
       this.left > 0 - this.width &&
       this.left < this.screenWidth
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  hasBitten(player) {
+    // Zombie rectangle is intersecting with player rectange
+
+    if (
+      this.top + this.height > player.top &&
+      this.top < player.top + player.height &&
+      this.left + this.width > player.left &&
+      this.left < player.left + player.width
     ) {
       return true;
     } else {

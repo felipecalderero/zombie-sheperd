@@ -12,8 +12,8 @@ class Game {
     // Initialize a new player
     this.player = new Player(
       this.gameScreen,
+      400,
       200,
-      500,
       100,
       150,
       "./images/beagle.gif"
@@ -65,27 +65,24 @@ class Game {
     this.player.move();
     console.log("moving player");
 
+    /*
     // Move Zombies
     const bittenDist = Math.round(
       Math.sqrt(this.player.height ** 2 + this.player.width ** 2)
     );
     console.log(bittenDist);
-    const followDist = 400;
+*/
+
     if (this.zombies.length > 0) {
       for (let i = 0; i < this.zombies.length; i++) {
         let zombie = this.zombies[i];
         zombie.move();
+
+        const followDist = 200;
         let distance = zombie.distanceToPlayer(this.player);
-        console.log(
-          this.player.top,
-          this.player.height,
-          this.player.width,
-          this.player.left,
-          distance,
-          bittenDist
-        );
+
         // Player got bitten!
-        if (distance < bittenDist) {
+        if (zombie.hasBitten(this.player)) {
           // Remove the zombie element from the DOM
           zombie.element.remove();
           // Remove zombie object from the array
@@ -96,7 +93,23 @@ class Game {
           document.getElementById("lives").innerText = this.lives;
           // Update the counter variable to account for the removed zombie
         } else if (distance < followDist) {
-          // Player will be follow by Zombie!
+          // Player is close some zombies and they start following her
+          // Player will be followed by Zombie!
+          // New zombie direction
+          console.log(this.player.top, zombie.top);
+          const directionTop = this.player.top - zombie.top;
+          const directionLeft = this.player.left - zombie.left;
+          const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);
+
+          zombie.direction[0] = directionLeft / module;
+          zombie.direction[1] = directionTop / module;
+
+          /*
+          zombie.element.remove();
+          // Remove zombie object from the array
+          this.zombies.splice(i, 1);
+          i--;
+          */
         }
       }
     }
@@ -117,7 +130,7 @@ class Game {
 
     // Create a new zombie based on a random probability
     // when there is no other zombies on the screen
-    if (Math.random() > 0.5 && this.zombies.length < 550) {
+    if (Math.random() > 0.5 && this.zombies.length < 250) {
       this.zombies.push(new Zombie(this.gameScreen, this.height, this.width));
       console.log("Adding a new Zombie");
     }
