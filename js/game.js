@@ -65,55 +65,6 @@ class Game {
     this.player.move();
     console.log("moving player");
 
-    /*
-    // Move Zombies
-    const bittenDist = Math.round(
-      Math.sqrt(this.player.height ** 2 + this.player.width ** 2)
-    );
-    console.log(bittenDist);
-*/
-
-    if (this.zombies.length > 0) {
-      for (let i = 0; i < this.zombies.length; i++) {
-        let zombie = this.zombies[i];
-        zombie.move();
-
-        const followDist = 200;
-        let distance = zombie.distanceToPlayer(this.player);
-
-        // Player got bitten!
-        if (zombie.hasBitten(this.player)) {
-          // Remove the zombie element from the DOM
-          zombie.element.remove();
-          // Remove zombie object from the array
-          this.zombies.splice(i, 1);
-          i--;
-          // Reduce player's lives by 1
-          this.lives--;
-          document.getElementById("lives").innerText = this.lives;
-          // Update the counter variable to account for the removed zombie
-        } else if (distance < followDist) {
-          // Player is close some zombies and they start following her
-          // Player will be followed by Zombie!
-          // New zombie direction
-          console.log(this.player.top, zombie.top);
-          const directionTop = this.player.top - zombie.top;
-          const directionLeft = this.player.left - zombie.left;
-          const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);
-
-          zombie.direction[0] = directionLeft / module;
-          zombie.direction[1] = directionTop / module;
-
-          /*
-          zombie.element.remove();
-          // Remove zombie object from the array
-          this.zombies.splice(i, 1);
-          i--;
-          */
-        }
-      }
-    }
-
     // Remove Zombies that go out of the Screen
     this.zombies.forEach((zombie, index) => {
       if (!zombie.onScreen()) {
@@ -125,15 +76,75 @@ class Game {
       }
     });
 
-    // Have any of the Zombies bitten the Player?
-    // That is, a Zombie has had a collision with the player
+    // Define distance for a zombie to start following the player
+    const followDist = 200;
+    // Check if zombies have bitten or are following the player
+    if (this.zombies.length > 0) {
+      for (let i = 0; i < this.zombies.length; i++) {
+        let zombie = this.zombies[i];
+        zombie.move();
+
+        // Compute distance form the zombie to the player
+        let distance = zombie.distanceToPlayer(this.player);
+
+        // Player got bitten?
+        if (zombie.hasBitten(this.player)) {
+          // Remove the zombie element from the DOM
+          zombie.element.remove();
+          // Remove zombie object from the array
+          this.zombies.splice(i, 1);
+          // Update the counter variable to account for the removed zombie
+          i--;
+          // Reduce player's lives by 1
+          this.lives--;
+          document.getElementById("lives").innerText = this.lives;
+        } else if (distance < followDist) {
+          // Player is close to the zombie and it starts following her
+          // Update zombie direction to move towards player
+          console.log(this.player.top, zombie.top);
+          const directionTop = this.player.top - zombie.top;
+          const directionLeft = this.player.left - zombie.left;
+          const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);
+
+          zombie.direction[0] = directionLeft / module;
+          zombie.direction[1] = directionTop / module;
+        }
+      }
+    }
+
+    // There has always to be one treat on screen
+    // Check if player has eaten the treat
+    const numTreats = 1;
+
+    if (this.treats.length > 0) {
+      for (let i = 0; i < this.treats.length; i++) {
+        let treat = this.treats[i];
+        if (treat.hasBeenEaten(this.player)) {
+          this.score += 1;
+          // Remove the treat element from the DOM
+          treat.element.remove();
+          // Remove zombie object from the array
+          this.treats.splice(i, 1);
+          // Update the counter variable to account for the removed zombie
+          i--;
+          document.getElementById("score").innerText = this.score;
+        }
+      }
+    }
+
+    if (this.treats.length < numTreats) {
+      this.treats.push(new Treat(this.gameScreen, this.height, this.width));
+      console.log("Adding a new Treat");
+    }
 
     // Create a new zombie based on a random probability
     // when there is no other zombies on the screen
-    if (Math.random() > 0.5 && this.zombies.length < 250) {
+    if (Math.random() > 0 && this.zombies.length < this.score + 1) {
       this.zombies.push(new Zombie(this.gameScreen, this.height, this.width));
       console.log("Adding a new Zombie");
     }
+
+    //
 
     // Check distance from the player to all the zombies.
     // If the distance from the player to a zombie is small than Zombie_Radius,
