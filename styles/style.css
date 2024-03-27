@@ -66,7 +66,7 @@ body {
   text-align: center;
 }
 
-#intro-text button {
+button {
   font-size: 30px;
   background-color: greenyellow;
   color: purple;
@@ -169,6 +169,44 @@ body {
 
 #game-end {
   display: none;
+  position: fixed;
+  top: 10%;
+  left: 30%;
+  z-index: 10;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 40px;
+}
+
+#game-end h1 {
+  margin: 10px;
+  padding: 0;
+  color: black;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 6rem;
+  text-align: center;
+}
+
+#game-end h2 {
+  margin: 0px 0 40px 0;
+  padding: 0;
+  color: purple;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-family: "Denk One", sans-serif;
+  letter-spacing: 2px;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 4rem;
+}
+
+#your-score {
+  font-size: 4rem;
+  font-weight: bold;
 }
 
 .game-intro p {

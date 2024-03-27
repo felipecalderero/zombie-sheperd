@@ -25,7 +25,8 @@ class Game {
     // Intialize array of Treats
     this.treats = [];
     // Initialize score
-    this.score = 0;
+    this.score = 1;
+    document.getElementById("score").innerText = this.score;
     // Initialize lives
     this.lives = 3;
     // Game is not over
@@ -59,9 +60,9 @@ class Game {
     this.update();
 
     // If "gameIsOver" is set to "true" clear the interval to stop the loop
-    if (this.gameIsOver) {
-      clearInterval(this.gameIntervalId);
-    }
+    //if (this.gameIsOver) {
+    //  clearInterval(this.gameIntervalId);
+    //}
   }
 
   update() {
@@ -69,7 +70,7 @@ class Game {
     this.player.move();
     console.log("moving player");
 
-    // Remove Zombies that go out of the Screen
+    /*   // Remove Zombies that go out of the Screen
     this.zombies.forEach((zombie, index) => {
       if (!zombie.onScreen()) {
         // Remove the zombie from the DOM
@@ -79,6 +80,7 @@ class Game {
         // Update the counter variable to account for the removed zombie
       }
     });
+    */
 
     // Define distance for a zombie to start following the player
     const followDist = 400;
@@ -152,7 +154,7 @@ class Game {
 
     // Create a new zombie based on a random probability
     // when there is no other zombies on the screen
-    if (Math.random() > 0 && this.zombies.length < this.score + 1) {
+    if (Math.random() > 0 && this.zombies.length < this.score) {
       this.zombies.push(new Zombie(this.gameScreen));
       console.log("Adding a new Zombie");
     }
@@ -196,41 +198,30 @@ class Game {
         i--;
       }
     }
-
+*/
     // If the lives are 0, end the game
-    if (this.lives === 0) {
+    if (this.lives <= 0) {
+      this.lives = 0;
       console.log("Run out of lives! Ending Game");
-      //this.endGame();
+      this.endGame();
     }
-
-    // Create a new zombie based on a random probability
-    // when there is no other zombies on the screen
-    if (Math.random() > 0.5 && this.zombies.length < 150) {
-      this.zombies.push(new Zombie(this.gameScreen, this.height, this.width));
-      console.log("Adding a new Zombie");
-    }
-
-    // Create a new treat based on a random probability
-    // when there is no other zombies on the screen
-    if (Math.random() > 0.98 && this.treats.length < 2) {
-      this.treats.push(new Treat(this.gameScreen));
-      console.log("Adding a new Treat");
-    }
-
-    */
   }
 
   // Create a new method responsible for ending the game
   endGame() {
     this.player.element.remove();
-    this.zombies.forEach((zombie) => zombie.element.remove());
+    //this.treats = [];
+
+    //this.zombies.forEach((zombie) => zombie.element.remove());
 
     this.gameIsOver = true;
 
     // Hide game screen
-    this.gameScreen.style.display = "none";
+    //this.gameScreen.style.display = "none";
+    this.gameScreen.style.zIndex = -1;
     // Show end game screen
     this.gameEndScreen.style.display = "block";
+    document.getElementById("your-score").innerText = `${this.score} zombies!`;
   }
   v;
 }
