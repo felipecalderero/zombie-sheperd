@@ -7,6 +7,10 @@ class Player extends Component {
     this.directionX = 0;
     this.directionY = 0;
     this.speed = 5;
+
+    //Once bitten, protect the player for some time
+    this.inmune = true;
+    setTimeout(() => (this.inmune = false), 1000);
   }
 
   move() {
@@ -32,7 +36,7 @@ class Player extends Component {
     this.updatePosition();
   }
 
-  didCollide(obstacle) {
+  /*didCollide(obstacle) {
     const playerRect = this.element.getBoundingClientRect();
     const obstacleRect = obstacle.element.getBoundingClientRect();
 
@@ -47,5 +51,5 @@ class Player extends Component {
     } else {
       return false;
     }
-  }
+  }*/
 }

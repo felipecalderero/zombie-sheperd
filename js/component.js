@@ -21,8 +21,8 @@ class Component {
   }
 
   updatePosition() {
-    this.element.style.left = `${this.left}px`;
-    this.element.style.top = `${this.top}px`;
-    this.element.style.zIndex = this.top - this.height;
+    this.element.style.left = `${Math.round(this.left)}px`;
+    this.element.style.top = `${Math.round(this.top)}px`;
+    this.element.style.zIndex = Math.round(this.top + this.height);
   }
 }

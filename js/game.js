@@ -7,14 +7,14 @@ class Game {
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
     // Initialize Game Screen
-    this.height = 600;
-    this.width = 1000;
+    //this.height = 600;
+    //this.width = 1000;
 
     // Initialize a new player
     this.player = new Player(
       this.gameScreen,
-      800,
-      400,
+      window.innerWidth / 2,
+      window.innerHeight / 2,
       70,
       70,
       "./images/ojos-vueltos.png"
@@ -81,7 +81,7 @@ class Game {
     });
 
     // Define distance for a zombie to start following the player
-    const followDist = 200;
+    const followDist = 400;
     // Check if zombies have bitten or are following the player
     if (this.zombies.length > 0) {
       for (let i = 0; i < this.zombies.length; i++) {
@@ -92,13 +92,23 @@ class Game {
         let distance = zombie.distanceToPlayer(this.player);
 
         // Player got bitten?
-        if (zombie.hasBitten(this.player)) {
+        console.log(this.player.inmune);
+        if (this.player.inmune === false && zombie.hasBitten(this.player)) {
+          console.log("Player has been bitten by zombie");
+          //Once bitten, protect the player for some time
+          this.player.inmune = true;
+          this.player.element.src = "/images/beagle.gif";
+          setTimeout(() => {
+            this.player.element.src = "/images/ojos-vueltos.png";
+            this.player.inmune = false;
+          }, 2000);
+
           // Remove the zombie element from the DOM
-          zombie.element.remove();
+          //zombie.element.remove();
           // Remove zombie object from the array
-          this.zombies.splice(i, 1);
+          //this.zombies.splice(i, 1);
           // Update the counter variable to account for the removed zombie
-          i--;
+          //i--;
           // Reduce player's lives by 1
           this.lives--;
           document.getElementById("lives").innerText = this.lives;
@@ -136,14 +146,14 @@ class Game {
     }
 
     if (this.treats.length < numTreats) {
-      this.treats.push(new Treat(this.gameScreen, this.height, this.width));
+      this.treats.push(new Treat(this.gameScreen));
       console.log("Adding a new Treat");
     }
 
     // Create a new zombie based on a random probability
     // when there is no other zombies on the screen
     if (Math.random() > 0 && this.zombies.length < this.score + 1) {
-      this.zombies.push(new Zombie(this.gameScreen, this.height, this.width));
+      this.zombies.push(new Zombie(this.gameScreen));
       console.log("Adding a new Zombie");
     }
 
