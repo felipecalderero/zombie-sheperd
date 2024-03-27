@@ -34,6 +34,14 @@ class Game {
     // Interval Loop ID and Frame Rate
     this.gameIntervalId;
     this.gameLoopFrecuency = Math.round(1000 / 60); // 60fps
+
+    this.zombieSound = new Audio("/sounds/zombies.wav"); // buffers automatically when created
+    this.zombieSound.playbackRate = 0.5;
+    this.gameOverSound = new Audio("/sounds/fail-trombone-03.wav");
+    this.treatSound = new Audio("/sounds/button-3.wav");
+    this.playerBittenSound = new Audio(
+      "/sounds/dog-crying-for-a-hugwav-14912.mp3"
+    );
   }
 
   start() {
@@ -56,6 +64,8 @@ class Game {
   gameLoop() {
     console.log("in the game loop");
 
+    this.zombieSound.play();
+
     // Function updating the Game
     this.update();
 
@@ -70,18 +80,6 @@ class Game {
     this.player.move();
     console.log("moving player");
 
-    /*   // Remove Zombies that go out of the Screen
-    this.zombies.forEach((zombie, index) => {
-      if (!zombie.onScreen()) {
-        // Remove the zombie from the DOM
-        zombie.element.remove();
-        // Remove zombie object from the array
-        this.zombies.splice(index, 1);
-        // Update the counter variable to account for the removed zombie
-      }
-    });
-    */
-
     // Define distance for a zombie to start following the player
     const followDist = 400;
     // Check if zombies have bitten or are following the player
@@ -90,39 +88,44 @@ class Game {
         let zombie = this.zombies[i];
         zombie.move();
 
-        // Compute distance form the zombie to the player
-        let distance = zombie.distanceToPlayer(this.player);
+        if (this.gameIsOver === false) {
+          // Compute distance form the zombie to the player
+          let distance = zombie.distanceToPlayer(this.player);
 
-        // Player got bitten?
-        console.log(this.player.inmune);
-        if (this.player.inmune === false && zombie.hasBitten(this.player)) {
-          console.log("Player has been bitten by zombie");
-          //Once bitten, protect the player for some time
-          this.player.inmune = true;
-          this.player.element.src = "/images/beagle.gif";
-          setTimeout(() => {
-            this.player.element.src = "/images/ojos-vueltos.png";
-            this.player.inmune = false;
-          }, 2000);
+          // Player got bitten?
+          if (this.player.inmune === false && zombie.hasBitten(this.player)) {
+            console.log("Player has been bitten by zombie");
+            this.playerBittenSound.play();
+            setTimeout(() => this.playerBittenSound.pause(), 1000);
+            //Once bitten, protect the player for some time
+            this.player.inmune = true;
+            this.player.element.src = "/images/beagle.gif";
+            setTimeout(() => {
+              this.player.element.src = "/images/ojos-vueltos.png";
+              this.player.inmune = false;
+            }, 2000);
 
-          // Remove the zombie element from the DOM
-          //zombie.element.remove();
-          // Remove zombie object from the array
-          //this.zombies.splice(i, 1);
-          // Update the counter variable to account for the removed zombie
-          //i--;
-          // Reduce player's lives by 1
-          this.lives--;
-          document.getElementById("lives").innerText = this.lives;
-        } else if (distance < followDist) {
-          // Player is close to the zombie and it starts following her
-          // Update zombie direction to move towards player
-          const directionTop = this.player.top - zombie.top;
-          const directionLeft = this.player.left - zombie.left;
-          const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);
+            // Remove the zombie element from the DOM
+            //zombie.element.remove();
+            // Remove zombie object from the array
+            //this.zombies.splice(i, 1);
+            // Update the counter variable to account for the removed zombie
+            //i--;
+            // Reduce player's lives by 1
+            if (this.lives > 0) {
+              this.lives--;
+            }
+            document.getElementById("lives").innerText = this.lives;
+          } else if (distance < followDist) {
+            // Player is close to the zombie and it starts following her
+            // Update zombie direction to move towards player
+            const directionTop = this.player.top - zombie.top;
+            const directionLeft = this.player.left - zombie.left;
+            const module = Math.sqrt(directionTop ** 2 + directionLeft ** 2);
 
-          zombie.direction[0] = directionLeft / module;
-          zombie.direction[1] = directionTop / module;
+            zombie.direction[0] = directionLeft / module;
+            zombie.direction[1] = directionTop / module;
+          }
         }
       }
     }
@@ -135,6 +138,7 @@ class Game {
       for (let i = 0; i < this.treats.length; i++) {
         let treat = this.treats[i];
         if (treat.hasBeenEaten(this.player)) {
+          this.treatSound.play();
           this.score += 1;
           // Remove the treat element from the DOM
           treat.element.remove();
@@ -199,6 +203,7 @@ class Game {
       }
     }
 */
+
     // If the lives are 0, end the game
     if (this.lives <= 0) {
       this.lives = 0;
@@ -209,10 +214,11 @@ class Game {
 
   // Create a new method responsible for ending the game
   endGame() {
+    if (!this.gameIsOver) {
+      setTimeout(() => this.gameOverSound.play(), 1000);
+    }
     this.player.element.remove();
-    //this.treats = [];
-
-    //this.zombies.forEach((zombie) => zombie.element.remove());
+    this.player.inmune = true;
 
     this.gameIsOver = true;
 
@@ -223,5 +229,4 @@ class Game {
     this.gameEndScreen.style.display = "block";
     document.getElementById("your-score").innerText = `${this.score} zombies!`;
   }
-  v;
 }

@@ -117,6 +117,7 @@ class Zombie extends Component {
     const horizontalOffset = 60;
 
     if (
+      this.biting &&
       this.top + this.height > player.top + verticalOffset &&
       this.top < player.top + player.height - verticalOffset &&
       this.left + this.width > player.left + horizontalOffset &&

@@ -3,8 +3,11 @@ window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
 
+  const buttonSound = new Audio("/sounds/button-16.wav"); // buffers automatically when created
+
   // Add listener to Start Button
   startButton.addEventListener("click", function () {
+    buttonSound.play();
     startGame();
   });
 

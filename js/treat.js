@@ -3,10 +3,26 @@ class Treat extends Component {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    const randomLeft = Math.floor(Math.random() * (w - 40) + 20);
-    const randomTop = Math.floor(Math.random() * (h - 40) + 20);
+    // Size in pixels of the zombie
+    const height = 40;
+    const width = 40;
+    // Random posision of the screen at which the zombie is born
+    const offset = 100;
+    const randomTop = Math.floor(
+      Math.random() * (h - offset) + offset / 2 - height / 2
+    );
+    const randomLeft = Math.floor(
+      Math.random() * (w - offset) + offset / 2 - width / 2
+    );
 
-    super(gameScreen, randomLeft, randomTop, 40, 40, "./images/hueso1.png");
+    super(
+      gameScreen,
+      randomLeft,
+      randomTop,
+      width,
+      height,
+      "./images/hueso1.png"
+    );
   }
 
   hasBeenEaten(player) {
