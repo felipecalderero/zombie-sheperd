@@ -28,7 +28,7 @@ class Game {
     this.score = 1;
     document.getElementById("score").innerText = this.score;
     // Initialize lives
-    this.lives = 3;
+    this.lives = 1;
     // Game is not over
     this.gameIsOver = false;
     // Interval Loop ID and Frame Rate
@@ -42,6 +42,7 @@ class Game {
     this.playerBittenSound = new Audio(
       "/sounds/dog-crying-for-a-hugwav-14912.mp3"
     );
+    this.taDaSound = new Audio("/sounds/ta-da_yrvBrlS.mp3");
   }
 
   start() {
@@ -78,7 +79,7 @@ class Game {
   update() {
     // Update Player position if moving
     this.player.move();
-    console.log("moving player");
+    //console.log("moving player");
 
     // Define distance for a zombie to start following the player
     const followDist = 400;
@@ -205,7 +206,7 @@ class Game {
 */
 
     // If the lives are 0, end the game
-    if (this.lives <= 0) {
+    if (this.lives <= 0 && !this.gameIsOver) {
       this.lives = 0;
       console.log("Run out of lives! Ending Game");
       this.endGame();
@@ -215,18 +216,66 @@ class Game {
   // Create a new method responsible for ending the game
   endGame() {
     if (!this.gameIsOver) {
-      setTimeout(() => this.gameOverSound.play(), 1000);
+      setTimeout(() => {
+        this.player.element.remove();
+        this.player.inmune = true;
+
+        this.gameIsOver = true;
+
+        // Hide game screen
+        //this.gameScreen.style.display = "none";
+        this.gameScreen.style.zIndex = -1;
+        // Show end game screen
+        this.gameEndScreen.style.display = "block";
+        const scoreArea = document.getElementById("your-score");
+        if (this.score === 1) {
+          scoreArea.innerText = `${this.score} zombie!`;
+        } else {
+          scoreArea.innerText = `${this.score} zombies!`;
+        }
+
+        // Storing your best game
+        // localStorage.clear();
+        let bestScore = localStorage.getItem("bestGameScore");
+        console.log(bestScore);
+        if (bestScore === null || bestScore < this.score) {
+          this.taDaSound.play();
+          bestScore = this.score;
+          const currentDate = new Date();
+          localStorage.setItem("bestGameScore", this.score);
+          localStorage.setItem("bestGameDate", currentDate);
+
+          const newH3 = document.createElement("h3");
+          newH3.innerText = `Congratulations!`;
+          const newP = document.createElement("p");
+          newP.innerText = `New personal record on 
+          ${currentDate.toLocaleDateString("en-us", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}, at ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+          scoreArea.appendChild(newH3);
+          scoreArea.appendChild(newP);
+        } else {
+          this.gameOverSound.play();
+          const bestGameDate = new Date(localStorage.getItem("bestGameDate"));
+          console.log(bestGameDate);
+          const newH3 = document.createElement("h3");
+          newH3.innerText = `Your best score is ${bestScore} zombies!`;
+          const newP = document.createElement("p");
+          newP.innerText = `Achieved on 
+          ${bestGameDate.toLocaleDateString("en-us", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}, at ${bestGameDate.getHours()}:${bestGameDate.getMinutes()}`;
+          scoreArea.appendChild(newH3);
+          scoreArea.appendChild(newP);
+        }
+      }, 1000);
     }
-    this.player.element.remove();
-    this.player.inmune = true;
-
-    this.gameIsOver = true;
-
-    // Hide game screen
-    //this.gameScreen.style.display = "none";
-    this.gameScreen.style.zIndex = -1;
-    // Show end game screen
-    this.gameEndScreen.style.display = "block";
-    document.getElementById("your-score").innerText = `${this.score} zombies!`;
+    //clearInterval(this.gameIntervalId);
   }
 }

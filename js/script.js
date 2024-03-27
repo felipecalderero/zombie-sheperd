@@ -4,6 +4,11 @@ window.onload = function () {
   const restartButton = document.getElementById("restart-button");
 
   const buttonSound = new Audio("/sounds/button-16.wav"); // buffers automatically when created
+  const barkingSound = new Audio(
+    "/sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
+  ); // buffers automatically when created
+  barkingSound.play();
+  setTimeout(() => barkingSound.pause(), 1000);
 
   // Add listener to Start Button
   startButton.addEventListener("click", function () {
@@ -94,6 +99,7 @@ window.onload = function () {
 
   // The function that reloads the page to start a new game
   function restartGame() {
+    buttonSound.play();
     location.reload();
   }
 };
