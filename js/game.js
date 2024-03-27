@@ -35,14 +35,14 @@ class Game {
     this.gameIntervalId;
     this.gameLoopFrecuency = Math.round(1000 / 60); // 60fps
 
-    this.zombieSound = new Audio("/sounds/zombies.wav"); // buffers automatically when created
+    this.zombieSound = new Audio("./sounds/zombies.wav"); // buffers automatically when created
     this.zombieSound.playbackRate = 0.5;
-    this.gameOverSound = new Audio("/sounds/fail-trombone-03.wav");
-    this.treatSound = new Audio("/sounds/button-3.wav");
+    this.gameOverSound = new Audio("./sounds/fail-trombone-03.wav");
+    this.treatSound = new Audio("./sounds/button-3.wav");
     this.playerBittenSound = new Audio(
-      "/sounds/dog-crying-for-a-hugwav-14912.mp3"
+      "./sounds/dog-crying-for-a-hugwav-14912.mp3"
     );
-    this.taDaSound = new Audio("/sounds/ta-da_yrvBrlS.mp3");
+    this.taDaSound = new Audio("./sounds/ta-da_yrvBrlS.mp3");
   }
 
   start() {
@@ -100,9 +100,9 @@ class Game {
             setTimeout(() => this.playerBittenSound.pause(), 1000);
             //Once bitten, protect the player for some time
             this.player.inmune = true;
-            this.player.element.src = "/images/beagle.gif";
+            this.player.element.src = "./images/beagle.gif";
             setTimeout(() => {
-              this.player.element.src = "/images/ojos-vueltos.png";
+              this.player.element.src = "./images/ojos-vueltos.png";
               this.player.inmune = false;
             }, 2000);
 
