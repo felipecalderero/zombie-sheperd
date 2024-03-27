@@ -3,9 +3,9 @@ window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
 
-  const buttonSound = new Audio("/sounds/button-16.wav"); // buffers automatically when created
+  const buttonSound = new Audio("./sounds/button-16.wav"); // buffers automatically when created
   const barkingSound = new Audio(
-    "/sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
+    "./sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
   ); // buffers automatically when created
   barkingSound.play();
   setTimeout(() => barkingSound.pause(), 1000);
