@@ -5,21 +5,34 @@ window.onload = function () {
   const soundButton = document.getElementById("sound-img");
 
   const buttonSound = new Audio("./sounds/button-16.wav"); // buffers automatically when created
+
+  const ambientIntroSound = new Audio("./sounds/anxious_intro.wav");
   const barkingSound = new Audio(
     "./sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
   ); // buffers automatically when created
 
+  // Initialize sound on
+  window.muteAll = false;
+  document.getElementById("sound-img").src = "./images/sound-png-icon-0.png";
+
   if (window.muteAll === false) {
-    barkingSound.play();
+    //ambientIntroSound.play();
+    setTimeout(() => barkingSound.play(), 500);
   }
   setTimeout(() => barkingSound.pause(), 1000);
 
   // Add listener to Sound image
-  window.muteAll = true;
   soundButton.addEventListener("click", function () {
-    window.muteAll = !window.muteAll;
-    soundImage = document.getElementById("sound-img img");
-    soundImage.src = "./images/haut-parleur-gris-et-icone-sonore.png";
+    // Activate sound
+    if (window.muteAll === true) {
+      window.muteAll = false;
+      document.getElementById("sound-img").src =
+        "./images/sound-png-icon-0.png";
+    } else {
+      window.muteAll = true;
+      document.getElementById("sound-img").src =
+        "./images/sound-off-icon-40963.png";
+    }
   });
 
   // Add listener to Start Button
