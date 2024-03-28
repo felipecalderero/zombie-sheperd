@@ -17,7 +17,7 @@ class Game {
       window.innerHeight / 2,
       100,
       100,
-      "./images/dog.png"
+      "./images/player0.png"
     );
 
     // Initialize array of Zombies
@@ -26,9 +26,9 @@ class Game {
     this.treats = [];
     // Initialize score
     this.score = 1;
-    document.getElementById("score").innerText = this.score;
+    //document.getElementById("score").innerText = this.score;
     // Initialize lives
-    this.lives = 2;
+    this.lives = 3;
     // Game is not over
     this.gameIsOver = false;
     // Interval Loop ID and Frame Rate
@@ -86,7 +86,7 @@ class Game {
     //console.log("moving player");
 
     // Define distance for a zombie to start following the player
-    const followDist = 400;
+    const followDist = 500;
     // Check if zombies have bitten or are following the player
     if (this.zombies.length > 0) {
       for (let i = 0; i < this.zombies.length; i++) {
@@ -167,7 +167,7 @@ class Game {
           this.treats.splice(i, 1);
           // Update the counter variable to account for the removed zombie
           i--;
-          document.getElementById("score").innerText = this.score;
+          document.getElementById("score").innerText = `${this.score} zombies`;
         }
       }
     }
@@ -179,7 +179,14 @@ class Game {
 
     // Create a new zombie based on a random probability
     // when there is no other zombies on the screen
-    if (Math.random() > 0 && this.zombies.length < this.score) {
+    if (!this.gameIsOver && this.zombies.length < this.score) {
+      this.zombies.push(new Zombie(this.gameScreen));
+      console.log("Adding a new Zombie");
+    } else if (
+      this.gameIsOver &&
+      this.zombies.length < 300 &&
+      Math.random() < 0.1
+    ) {
       this.zombies.push(new Zombie(this.gameScreen));
       console.log("Adding a new Zombie");
     }

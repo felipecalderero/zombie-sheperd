@@ -34,8 +34,7 @@ window.onload = function () {
     document.getElementById("sound-img").src = "./images/sound-png-icon-0.png";
   } else {
     console.log("if true");
-    document.getElementById("sound-img").src =
-      "./images/sound-off-icon-40963.png";
+    document.getElementById("sound-img").src = "./images/sound-off.png";
   }
 
   if (window.muteAll === false) {
@@ -53,8 +52,7 @@ window.onload = function () {
         "./images/sound-png-icon-0.png";
     } else {
       window.muteAll = true;
-      document.getElementById("sound-img").src =
-        "./images/sound-off-icon-40963.png";
+      document.getElementById("sound-img").src = "./images/sound-off.png";
     }
   });
 
@@ -82,6 +80,7 @@ window.onload = function () {
       "ArrowRight",
       "ArrowDown",
       "Escape",
+      "Enter",
     ];
 
     // Check if the pressed key is in the possible Keystrokes array
@@ -106,8 +105,36 @@ window.onload = function () {
           break;
         case "Escape":
           // clear local storage
-          console.log("Shortcut to clean local storage");
+          console.log("Clearing local storage");
           localStorage.clear();
+          break;
+        case "Enter":
+          // change character
+          console.log("Change character");
+          const maxCharacters = 6;
+          let stringCharacter = game.player.element.src;
+          console.log(stringCharacter);
+          let currentCharacter = Number(
+            stringCharacter[stringCharacter.length - 5]
+          );
+          console.log(stringCharacter[-5]);
+          //let randomCharacter = Math.floor(Math.random() * numCharacters);
+          currentCharacter = (currentCharacter + 1) % maxCharacters;
+          console.log(currentCharacter);
+          console.log("./images/player" + currentCharacter + ".png");
+          if (currentCharacter > 0) {
+            game.player.width = 130;
+            game.player.height = 200;
+            game.player.element.style.width = `${130}px`;
+            game.player.element.style.height = `${200}px`;
+          } else {
+            game.player.width = 100;
+            game.player.height = 100;
+            game.player.element.style.width = `${100}px`;
+            game.player.element.style.height = `${100}px`;
+          }
+          game.player.element.src =
+            "./images/player" + currentCharacter + ".png";
           break;
       }
     }
