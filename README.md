@@ -28,34 +28,24 @@ Zombie Shepherd is an interactive web game where players guide a shepherd dog th
 ## Data structure
 
 - **Game**
-- Properties:
-  `startScreen`, `gameContainer`, `gameScreen`, `gameEndScreen`, `player`, `zombies`, `treats`, `score`, `lives`, `gameIsOver`, `gameIntervalId`, `gameLoopFrecuency`, `zombieSound`, `gameOverSound`, `treatSound`, `playerBittenSound`, `taDaSound`
-- Methods:
-  `start()`, `gameLoop()`, `update()`, `endGame()`
+  Properties: `startScreen`, `gameContainer`, `gameScreen`, `gameEndScreen`, `player`, `zombies`, `treats`, `score`, `lives`, `gameIsOver`, `gameIntervalId`, `gameLoopFrecuency`, `zombieSound`, `gameOverSound`, `treatSound`, `playerBittenSound`, `taDaSound`
+  Methods:`start()`, `gameLoop()`, `update()`, `endGame()`
 
 - **Player**
-- Properties:
-  `directionX`, `directionY`, `speed`, `inmune`
-- Methods:
-  `move()`
+  Properties: `directionX`, `directionY`, `speed`, `inmune`
+  Methods: `move()`
 
 - **Zombie**
-- Properties:
-  `direction`, `speed`, `changeDirection`, `biting`
-- Methods:
-  `move()`, `onScreen()`, `hasBitten(player)`, `distanceToPlayer(player)`
+  Properties: `direction`, `speed`, `changeDirection`, `biting`
+  Methods: `move()`, `onScreen()`, `hasBitten(player)`, `distanceToPlayer(player)`
 
 - **Treat**
-- Properties:
-  `none additional to those inherited from Component`
-- Methods:
-  `hasBeenEaten(player)`
+  Properties: `none additional to those inherited from Component`
+  Methods: `hasBeenEaten(player)`
 
 - **Component**
-- Properties:
-  `gameScreen`, `left`, `top`, `width`, `height`, `element`
-- Methods:
-  `updatePosition()`
+  Properties: `gameScreen`, `left`, `top`, `width`, `height`, `element`
+  Methods: `updatePosition()`
 
 ## States and State Transitions
 
@@ -76,7 +66,7 @@ Zombie Shepherd is an interactive web game where players guide a shepherd dog th
 
 ## Links
 
-- [Trello Link](https://trello.com)
-- [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
-- [Deployment Link](http://github.com)
+- [Trello Link](https://trello.com/b/GZ4doOIE/my-first-kanban-board)
+- [Slides Link](https://docs.google.com/presentation/d/1JxP_8lWYuJaK_KpdvtxYDuK1iPcDlqOhePxD4smvFC8/edit?usp=sharing)
+- [Github repository Link](https://github.com/felipecalderero/zombie-sheperd)
+- [Deployment Link](https://felipecalderero.github.io/zombie-sheperd/)
