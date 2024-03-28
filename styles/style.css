@@ -8,13 +8,6 @@ body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  /*text-align: center;
-  /*background-image: url("/images/zombie_background.png");
-  background-repeat: no-repeat;
-  height: 500px; /* You must set a specified height */
-  /*background-position: center center; /* Center the image */
-  /*background-repeat: no-repeat; /* Do not repeat the image */
-  /*background-size: contain; /* Resize the background image to cover the entire container */
 }
 
 #game-intro {
@@ -79,7 +72,6 @@ button {
   border-radius: 45px;
   margin-bottom: 20px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
-
   user-select: none;
 }
 
@@ -95,12 +87,15 @@ button:active {
 }
 
 #footer ul {
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #footer li {
   list-style: none;
-  margin: 0px 140px 100px 100px;
+  padding: 0;
+  margin: 0px 0px 0px 0px;
   color: black;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   font-family: "Denk One", sans-serif;
@@ -154,30 +149,12 @@ button:active {
 
 #game-screen {
   display: none;
-  /*align-content: center;*/
   padding: 0px 0px;
   overflow: hidden;
-  /*position: relative;
-  /*background-image: url(../images/background.jpg);*/
   background-color: #ada0ff;
   background-size: cover;
   z-index: -1;
-  /*animation: slide 5s linear infinite;*/
 }
-
-/*
-@keyframes slide {
-  0% {
-    background-position: 0 -1000px;
-  }
-  95% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 50px;
-  }
-}
-*/
 
 #game-end {
   display: none;
@@ -246,11 +223,59 @@ button:active {
   font-weight: bold;
 }
 
-.game-intro p {
-  font-size: 24px;
-  font-family: "Verdana";
-}
+@media (max-width: 800px) {
+  /* Hide the zombie background image in the introduction section */
+  #intro-image img {
+    display: none;
+  }
 
-.arrows-img {
-  width: 150px;
+  /* Give some space around the text */
+  #game-intro-main {
+    padding: 40px 0 40px 0;
+  }
+
+  /* Adjust the main title and subtitle font sizes for smaller screens */
+  #intro-text h1 {
+    margin: 40px 0;
+
+    font-size: 4rem; /* Smaller font size for the game title */
+  }
+
+  #intro-text h2 {
+    margin: 20px 0;
+    font-size: 1.4rem; /* Smaller font size for the game subtitle */
+  }
+
+  /* Adjust button size for easier interaction on touch devices */
+  button {
+    font-size: 1.5rem; /* Smaller font size for text on buttons */
+    padding: 15px 30px; /* Adjust padding to make the button smaller */
+  }
+
+  /* Footer on vertical */
+  #footer ul {
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Adjust footer text for better readability */
+  #footer li {
+    padding: 0;
+    margin: 0 0 15px -10px; /* Adjust margins to fit small screens */
+    font-size: 0.7rem; /* Adjust font size for small screens */
+  }
+
+  /* Adapt the stats display for small screens */
+  #stats li {
+    padding: 0 20px; /* Reduce padding for each stat item */
+    font-size: 1.5rem; /* Smaller font size for stats */
+  }
+
+  #game-end h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
 }

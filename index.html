@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Character set for the website -->
     <meta charset="UTF-8" />
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compatibility meta tag for Internet Explorer -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Link to external CSS file for styling -->
     <link rel="stylesheet" href="./styles/style.css" />
+    <!-- Title of the webpage shown in the browser tab -->
     <title>Zombie Shepherd</title>
   </head>
   <body>
     <main>
-      <!-- #game-intro is initially shown on the game start screen -->
+      <!-- Game introduction section shown at the start -->
       <div id="game-intro">
+        <!-- Main container for the game's introduction -->
         <div id="game-intro-main">
+          <!-- Container for the introductory image -->
           <div id="intro-image">
+            <!-- Introductory image for the game -->
             <img
               src="./images/zombie_background.png"
               alt="main-image"
               class="logo-img"
             />
           </div>
+          <!-- Container for the game's introductory text and start button -->
           <div id="intro-text">
+            <!-- Game title -->
             <h1>Zombie<br />Shepherd</h1>
-            <h2>Ready to shepherd <br />some bitting zombies?</h2>
+            <!-- Game's tagline -->
+            <h2>Ready to shepherd <br />some biting zombies?</h2>
+            <!-- Button to start the game -->
             <button id="start-button">Start Game</button>
-            <!--<p>Use the left and right arrow to control the sheperd!</p> -->
-            <!--<img src="./images/arrows.png" alt="" class="arrows-img" /> -->
+            <!-- Placeholder for additional instructions or controls -->
           </div>
         </div>
+        <!-- Footer section with the designer's info and date -->
         <div id="footer">
           <ul>
             <li>Designed and coded by Felipe C.</li>
@@ -34,21 +46,24 @@
           </ul>
         </div>
       </div>
+      <!-- Sound control icon -->
       <div>
         <img src="./images/sound-off.png" alt="sound-image" id="sound-img" />
       </div>
 
+      <!-- Main game container, hidden initially -->
       <div id="game-container">
+        <!-- Container for displaying game stats like lives and level -->
         <div id="stats">
           <ul>
             <li>Lives: <span id="lives">3</span></li>
             <li>Level: <span id="score">1 zombie</span></li>
           </ul>
         </div>
-        <!-- #game-screen is initially hidden using CSS style display: none -->
+        <!-- Main game screen, where game action takes place, hidden initially -->
         <div id="game-screen"></div>
 
-        <!-- #game-end is initially hidden using CSS style display: none -->
+        <!-- Game over screen, shown when the game ends, hidden initially -->
         <div id="game-end">
           <h1>Game Over</h1>
           <br />
@@ -58,6 +73,7 @@
       </div>
     </main>
 
+    <!-- JavaScript files for game logic and functionality -->
     <script type="text/javascript" src="js/component.js"></script>
     <script type="text/javascript" src="js/treat.js"></script>
     <script type="text/javascript" src="js/zombie.js"></script>

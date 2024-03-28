@@ -31,9 +31,9 @@ class Zombie extends Component {
     //this.screenWidth = window.innerHeight;
     // Zombie direction of movement
     this.direction = [(Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2];
-    this.speed = 0.2;
+    this.speed = 0.4;
     // Rate of direction change of a zombie (ex. 4 -> 25% of times)
-    this.changeDirection = 10;
+    this.changeDirection = 50;
     // Variable to know when the zombie is biting (dangerous) and when is not
     this.biting = false;
 

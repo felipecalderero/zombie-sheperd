@@ -191,47 +191,6 @@ class Game {
       console.log("Adding a new Zombie");
     }
 
-    //
-
-    // Check distance from the player to all the zombies.
-    // If the distance from the player to a zombie is small than Zombie_Radius,
-    // the zombie is attracted to the player and starts moving towards him indefinitively
-
-    // Remove zombies that went out of the screen
-
-    /*
-    console.log(this.zombies);
-    // Check for collision and if a zombie is still on the screen
-    for (let i = 0; i < this.zombies.length; i++) {
-      const zombie = this.zombies[i];
-      zombie.move();
-
-      // If the player's car collides with an zombie
-      if (this.player.didCollide(zombie)) {
-        // Remove the zombie element from the DOM
-        zombie.element.remove();
-        // Remove zombie object from the array
-        this.zombies.splice(i, 1);
-        // Reduce player's lives by 1
-        this.lives--;
-        document.getElementById("lives").innerText = this.lives;
-        // Update the counter variable to account for the removed zombie
-        i--;
-      } // If the zombie is off the screen (at the bottom)
-      else if (zombie.top > this.height) {
-        // Increase the score by 1
-        this.score += 10;
-        document.getElementById("score").innerText = this.score;
-        // Remove the zombie from the DOM
-        zombie.element.remove();
-        // Remove zombie object from the array
-        this.zombies.splice(i, 1);
-        // Update the counter variable to account for the removed zombie
-        i--;
-      }
-    }
-*/
-
     // If the lives are 0, end the game
     if (this.lives <= 0 && !this.gameIsOver) {
       this.lives = 0;
@@ -287,7 +246,7 @@ class Game {
           scoreArea.appendChild(newH3);
           scoreArea.appendChild(newP);
         } else {
-          if (window.muteAll === false) {
+          if (window.muteAll === false && bestScore > this.score) {
             this.gameOverSound.play();
           }
           const bestGameDate = new Date(localStorage.getItem("bestGameDate"));
@@ -305,7 +264,7 @@ class Game {
           scoreArea.appendChild(newH3);
           scoreArea.appendChild(newP);
         }
-      }, 1000);
+      }, 500);
     }
     //clearInterval(this.gameIntervalId);
   }
