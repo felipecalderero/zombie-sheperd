@@ -1,5 +1,3 @@
-// js/obstacle.js
-
 class Zombie extends Component {
   constructor(gameScreen) {
     // Size in pixels of the zombie
@@ -26,9 +24,6 @@ class Zombie extends Component {
       "./images/zombie_hand.png"
     );
 
-    // Zombie knows the size of the screen
-    //this.screenHeight = window.innerWidth;
-    //this.screenWidth = window.innerHeight;
     // Zombie direction of movement
     this.direction = [(Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2];
     this.speed = 0.4;

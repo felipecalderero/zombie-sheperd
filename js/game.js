@@ -1,14 +1,11 @@
 class Game {
-  // code to be added
+  // Constructor
   constructor() {
     // Access to DOM elements: Intro, Game and GameOver screens
     this.startScreen = document.getElementById("game-intro");
     this.gameContainer = document.getElementById("game-container");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end");
-    // Initialize Game Screen
-    //this.height = 600;
-    //this.width = 1000;
 
     // Initialize a new player
     this.player = new Player(
@@ -31,14 +28,16 @@ class Game {
     this.lives = 3;
     // Game is not over
     this.gameIsOver = false;
-    // Interval Loop ID and Frame Rate
+    // Interval Loop ID and Frame R∫ate
     this.gameIntervalId;
     this.gameLoopFrecuency = Math.round(1000 / 60); // 60fps
 
     this.zombieSound = new Audio("./sounds/zombies.wav"); // buffers automatically when created
     this.zombieSound.playbackRate = 0.5;
+    this.zombieSound.volume = 0.2;
     this.gameOverSound = new Audio("./sounds/fail-trombone-03.wav");
     this.treatSound = new Audio("./sounds/button-3.wav");
+    this.treatSound.volume = 0.1;
     this.playerBittenSound = new Audio(
       "./sounds/dog-crying-for-a-hugwav-14912.mp3"
     );
@@ -181,6 +180,7 @@ class Game {
     // when there is no other zombies on the screen
     if (!this.gameIsOver && this.zombies.length < this.score) {
       this.zombies.push(new Zombie(this.gameScreen));
+      this.zombieSound.volume = Math.min(this.zombieSound.volume + 0.05, 1);
       console.log("Adding a new Zombie");
     } else if (
       this.gameIsOver &&
@@ -188,6 +188,7 @@ class Game {
       Math.random() < 0.1
     ) {
       this.zombies.push(new Zombie(this.gameScreen));
+      this.zombieSound.volume = Math.min(this.zombieSound.volume + 0.05, 1);
       console.log("Adding a new Zombie");
     }
 

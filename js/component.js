@@ -1,5 +1,3 @@
-// js/component.js
-
 class Component {
   constructor(gameScreen, left, top, width, height, imgSrc) {
     this.gameScreen = gameScreen;

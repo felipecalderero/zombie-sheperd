@@ -35,21 +35,4 @@ class Player extends Component {
     // Update the player's car position on the screen
     this.updatePosition();
   }
-
-  /*didCollide(obstacle) {
-    const playerRect = this.element.getBoundingClientRect();
-    const obstacleRect = obstacle.element.getBoundingClientRect();
-
-    if (
-      playerRect.left < obstacleRect.right &&
-      playerRect.right > obstacleRect.left &&
-      playerRect.top < obstacleRect.bottom &&
-      playerRect.bottom > obstacleRect.top
-    ) {
-      console.log("Crash!");
-      return true;
-    } else {
-      return false;
-    }
-  }*/
 }

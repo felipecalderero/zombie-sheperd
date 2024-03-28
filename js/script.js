@@ -4,14 +4,13 @@ window.onload = function () {
   const restartButton = document.getElementById("restart-button");
   const soundButton = document.getElementById("sound-img");
 
+  // Loading audio
   const buttonSound = new Audio("./sounds/button-16.wav"); // buffers automatically when created
-
   const barkingSound = new Audio(
     "./sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
-  ); // buffers automatically when created
+  );
 
-  // Initialize sound on
-  //window.muteAll = false;
+  // Initialize sound based on Local Storage
   document.getElementById("sound-img").src = "";
   //localStorage.clear();
   let soundGlobal = localStorage.getItem("soundGlobal");
@@ -38,7 +37,6 @@ window.onload = function () {
   }
 
   if (window.muteAll === false) {
-    //ambientIntroSound.play();
     setTimeout(() => barkingSound.play(), 500);
   }
   setTimeout(() => barkingSound.pause(), 1000);
