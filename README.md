@@ -28,23 +28,32 @@ Zombie Shepherd is an interactive web game where players guide a shepherd dog th
 ## Data structure
 
 - **Game**
+
   Properties: `startScreen`, `gameContainer`, `gameScreen`, `gameEndScreen`, `player`, `zombies`, `treats`, `score`, `lives`, `gameIsOver`, `gameIntervalId`, `gameLoopFrecuency`, `zombieSound`, `gameOverSound`, `treatSound`, `playerBittenSound`, `taDaSound`
+
   Methods:`start()`, `gameLoop()`, `update()`, `endGame()`
 
 - **Player**
+
   Properties: `directionX`, `directionY`, `speed`, `inmune`
+
   Methods: `move()`
 
 - **Zombie**
+
   Properties: `direction`, `speed`, `changeDirection`, `biting`
+
   Methods: `move()`, `onScreen()`, `hasBitten(player)`, `distanceToPlayer(player)`
 
 - **Treat**
+
   Properties: `none additional to those inherited from Component`
+
   Methods: `hasBeenEaten(player)`
 
 - **Component**
   Properties: `gameScreen`, `left`, `top`, `width`, `height`, `element`
+
   Methods: `updatePosition()`
 
 ## States and State Transitions
