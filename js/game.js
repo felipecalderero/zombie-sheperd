@@ -65,7 +65,11 @@ class Game {
   gameLoop() {
     console.log("in the game loop");
 
-    this.zombieSound.play();
+    if (window.muteAll === false) {
+      this.zombieSound.play();
+    } else {
+      this.zombieSound.pause();
+    }
 
     // Function updating the Game
     this.update();
@@ -96,7 +100,9 @@ class Game {
           // Player got bitten?
           if (this.player.inmune === false && zombie.hasBitten(this.player)) {
             console.log("Player has been bitten by zombie");
-            this.playerBittenSound.play();
+            if (window.muteAll === false) {
+              this.playerBittenSound.play();
+            }
             setTimeout(() => this.playerBittenSound.pause(), 1000);
             //Once bitten, protect the player for some time
             this.player.inmune = true;
@@ -139,7 +145,9 @@ class Game {
       for (let i = 0; i < this.treats.length; i++) {
         let treat = this.treats[i];
         if (treat.hasBeenEaten(this.player)) {
-          this.treatSound.play();
+          if (window.muteAll === false) {
+            this.treatSound.play();
+          }
           this.score += 1;
           // Remove the treat element from the DOM
           treat.element.remove();
@@ -239,7 +247,9 @@ class Game {
         let bestScore = localStorage.getItem("bestGameScore");
         console.log(bestScore);
         if (bestScore === null || bestScore < this.score) {
-          this.taDaSound.play();
+          if (window.muteAll === false) {
+            this.taDaSound.play();
+          }
           bestScore = this.score;
           const currentDate = new Date();
           localStorage.setItem("bestGameScore", this.score);
@@ -258,7 +268,9 @@ class Game {
           scoreArea.appendChild(newH3);
           scoreArea.appendChild(newP);
         } else {
-          this.gameOverSound.play();
+          if (window.muteAll === false) {
+            this.gameOverSound.play();
+          }
           const bestGameDate = new Date(localStorage.getItem("bestGameDate"));
           console.log(bestGameDate);
           const newH3 = document.createElement("h3");

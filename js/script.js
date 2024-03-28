@@ -2,17 +2,31 @@ window.onload = function () {
   // Get buttons on DOM
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
+  const soundButton = document.getElementById("sound-img");
 
   const buttonSound = new Audio("./sounds/button-16.wav"); // buffers automatically when created
   const barkingSound = new Audio(
     "./sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
   ); // buffers automatically when created
-  barkingSound.play();
+
+  if (window.muteAll === false) {
+    barkingSound.play();
+  }
   setTimeout(() => barkingSound.pause(), 1000);
+
+  // Add listener to Sound image
+  window.muteAll = true;
+  soundButton.addEventListener("click", function () {
+    window.muteAll = !window.muteAll;
+    soundImage = document.getElementById("sound-img img");
+    soundImage.src = "./images/haut-parleur-gris-et-icone-sonore.png";
+  });
 
   // Add listener to Start Button
   startButton.addEventListener("click", function () {
-    buttonSound.play();
+    if (window.muteAll === false) {
+      buttonSound.play();
+    }
     startGame();
   });
 
@@ -99,7 +113,9 @@ window.onload = function () {
 
   // The function that reloads the page to start a new game
   function restartGame() {
-    buttonSound.play();
+    if (window.muteAll === false) {
+      buttonSound.play();
+    }
     location.reload();
   }
 };
