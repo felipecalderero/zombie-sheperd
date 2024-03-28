@@ -3,8 +3,8 @@
 class Zombie extends Component {
   constructor(gameScreen) {
     // Size in pixels of the zombie
-    const height = 75;
-    const width = 75;
+    const height = 70;
+    const width = 70;
     // Get current size of the window
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -23,7 +23,7 @@ class Zombie extends Component {
       randomTop,
       height,
       width,
-      "./images/zombi_hand.png"
+      "./images/zombie_hand.png"
     );
 
     // Zombie knows the size of the screen

@@ -6,14 +6,37 @@ window.onload = function () {
 
   const buttonSound = new Audio("./sounds/button-16.wav"); // buffers automatically when created
 
-  const ambientIntroSound = new Audio("./sounds/anxious_intro.wav");
   const barkingSound = new Audio(
     "./sounds/ANMLDog_Barking dog 2 (ID 2954)_BSB.wav"
   ); // buffers automatically when created
 
   // Initialize sound on
-  window.muteAll = false;
-  document.getElementById("sound-img").src = "./images/sound-png-icon-0.png";
+  //window.muteAll = false;
+  document.getElementById("sound-img").src = "";
+  //localStorage.clear();
+  let soundGlobal = localStorage.getItem("soundGlobal");
+  console.log(soundGlobal);
+
+  if (soundGlobal === null) {
+    window.muteAll = false;
+  } else {
+    console.log("set sound to local storage");
+    if (soundGlobal === "false") {
+      window.muteAll = false;
+    } else {
+      window.muteAll = true;
+    }
+  }
+
+  if (window.muteAll === false) {
+    console.log("if false");
+
+    document.getElementById("sound-img").src = "./images/sound-png-icon-0.png";
+  } else {
+    console.log("if true");
+    document.getElementById("sound-img").src =
+      "./images/sound-off-icon-40963.png";
+  }
 
   if (window.muteAll === false) {
     //ambientIntroSound.play();
@@ -58,11 +81,14 @@ window.onload = function () {
       "ArrowUp",
       "ArrowRight",
       "ArrowDown",
+      "Escape",
     ];
 
     // Check if the pressed key is in the possible Keystrokes array
     if (possibleKeystrokes.includes(key)) {
       event.preventDefault();
+
+      console.log(key);
 
       // Update player's directionX and directionY based on the key pressed
       switch (key) {
@@ -77,6 +103,11 @@ window.onload = function () {
           break;
         case "ArrowDown":
           game.player.directionY = 1;
+          break;
+        case "Escape":
+          // clear local storage
+          console.log("Shortcut to clean local storage");
+          localStorage.clear();
           break;
       }
     }
@@ -129,6 +160,7 @@ window.onload = function () {
     if (window.muteAll === false) {
       buttonSound.play();
     }
+    localStorage.setItem("soundGlobal", window.muteAll);
     location.reload();
   }
 };

@@ -15,9 +15,9 @@ class Game {
       this.gameScreen,
       window.innerWidth / 2,
       window.innerHeight / 2,
-      70,
-      70,
-      "./images/ojos-vueltos.png"
+      100,
+      100,
+      "./images/dog.png"
     );
 
     // Initialize array of Zombies
@@ -28,7 +28,7 @@ class Game {
     this.score = 1;
     document.getElementById("score").innerText = this.score;
     // Initialize lives
-    this.lives = 1;
+    this.lives = 2;
     // Game is not over
     this.gameIsOver = false;
     // Interval Loop ID and Frame Rate
@@ -106,9 +106,21 @@ class Game {
             setTimeout(() => this.playerBittenSound.pause(), 1000);
             //Once bitten, protect the player for some time
             this.player.inmune = true;
-            this.player.element.src = "./images/beagle.gif";
+            //this.player.element.src = "./images/beagle.gif";
+
+            const blinkingInt = setInterval(() => {
+              console.log("Blinking");
+              if (this.player.element.style.display === "none") {
+                this.player.element.style.display = "block";
+              } else {
+                this.player.element.style.display = "none";
+              }
+            }, 100);
+
             setTimeout(() => {
-              this.player.element.src = "./images/ojos-vueltos.png";
+              clearInterval(blinkingInt);
+              //this.player.element.src = "./images/dog.png";
+              this.player.element.visibility = "visible";
               this.player.inmune = false;
             }, 2000);
 
